@@ -1,10 +1,10 @@
-//*Visualizzare in pagina 5 numeri casuali. Da lì parte un timer di 30 secondi.
+//*1.Visualizzare in pagina 5 numeri casuali. Da lì parte un timer di 30 secondi.
 
 //*Dopo 30 secondi:
-//*1-i numeri in pagina devono essere rimossi;
-//*2-l’utente deve inserire, UNO ALLA VOLTA, i numeri che ha visto precedentemente, tramite il prompt().
+//*2-i numeri in pagina devono essere rimossi;
+//*3-l’utente deve inserire, UNO ALLA VOLTA, i numeri che ha visto precedentemente, tramite il prompt().
 
-//*Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati.
+//*4.Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati.
 
 //* 1.
 //Ref
@@ -25,7 +25,7 @@ setTimeout(() => {
     //Output numbers
     indexText.innerHTML = randomNumbers;
 
-    console.log(randomNumbers);
+    console.log('Numeri casuali da ricordarfe: ', randomNumbers);
 
     //Second part of the game (remember the numbers)
     setTimeout(() => {
@@ -45,8 +45,12 @@ setTimeout(() => {
 
                 playerNumbers.push( parseInt( prompt(`Inserire uno alla volta i numeri che si ricordano. ${promptNumber} di ${randomNumbers.length}`) ) );
             };
-            console.log('I numeri del giocatore sono: ',playerNumbers);
+            console.log('I numeri del giocatore sono: ', playerNumbers);
 
+            const rightNumbers = randomNumbers.filter(element => playerNumbers.includes(element));
+            console.log(rightNumbers);
+
+            indexText.innerHTML = `Hai ricordato ben ${rightNumbers.length} numeri ed erano: ${rightNumbers}`;
         }, 500);
 
     },2500);
