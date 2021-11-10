@@ -19,17 +19,16 @@ setTimeout(() => {
     indexText.innerHTML = '';
 
     for (let i = 0; i < 5; i++) {
-        randomNumbers.push( randomNum(1, 10) );
+        randomNumbers.push( randomNum(1, 99) );
     }
 
     //Output numbers
     indexText.innerHTML = randomNumbers;
 
-    console.log('Numeri casuali da ricordarfe: ', randomNumbers);
-
     //Second part of the game (remember the numbers)
     setTimeout(() => {
         //* 2.
+        //HTML cleaning before the prompt to prevent Crome glitch
         indexText.innerHTML = '';
         setTimeout(() => {
             //* 3.
@@ -38,26 +37,26 @@ setTimeout(() => {
                 promptNumber++;
 
                 const playerChoice = ( parseInt( prompt(`Inserire uno alla volta i numeri che si ricordano. ${promptNumber} di ${randomNumbers.length}`) ) );
-
                 playerNumbers.push(playerChoice);
             }   while (promptNumber < randomNumbers.length - 1) {
                 promptNumber++;
 
                 playerNumbers.push( parseInt( prompt(`Inserire uno alla volta i numeri che si ricordano. ${promptNumber} di ${randomNumbers.length}`) ) );
             };
-            console.log('I numeri del giocatore sono: ', playerNumbers);
 
+            //* 4.
             const rightNumbers = randomNumbers.filter(element => playerNumbers.includes(element));
-            console.log(rightNumbers);
 
-            indexText.innerHTML = `Hai ricordato ben ${rightNumbers.length} numeri ed erano: ${rightNumbers}`;
-        }, 500);
+            if (rightNumbers.length != 0) {
+                indexText.innerHTML = `Hai ricordato ben ${rightNumbers.length} numeri ed erano: ${rightNumbers}`;
+            } else {
+                indexText.innerHTML = `Non hai ricordato nemmeno un numero, CAPRA! Mangia più pesce e riprova.`;
+            }
+        }, 100);
 
     },2500);
 
 }, 1500);
-
-
 
 /* 
 *FUNCTIONS

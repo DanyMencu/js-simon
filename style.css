@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(https://thumbs.dreamstime.com/b/remember-word-yellow-sticky-notes-11249701.jpg);
+    background-size: cover;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 1170px;
+    margin-top: 5rem;
+    text-align: center;
+}
