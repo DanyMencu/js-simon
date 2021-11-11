@@ -10,17 +10,11 @@
 //Ref
 const indexText = document.querySelector('.text');
 
-//Random numbers array
-const randomNumbers = [];
-const playerNumbers = [];
-
 setTimeout(() => {
     //HTML cleaning
     indexText.innerHTML = '';
 
-    for (let i = 0; i < 5; i++) {
-        randomNumbers.push( randomNum(1, 99) );
-    }
+    const randomNumbers = randomNumUniv(5);
 
     //Output numbers
     indexText.innerHTML = randomNumbers;
@@ -32,20 +26,10 @@ setTimeout(() => {
         indexText.innerHTML = '';
         setTimeout(() => {
             //* 3.
-            let promptNumber = 0;
-            do {
-                promptNumber++;
-
-                const playerChoice = ( parseInt( prompt(`Inserire uno alla volta i numeri che si ricordano. ${promptNumber} di ${randomNumbers.length}`) ) );
-                playerNumbers.push(playerChoice);
-            }   while (promptNumber < randomNumbers.length - 1) {
-                promptNumber++;
-
-                playerNumbers.push( parseInt( prompt(`Inserire uno alla volta i numeri che si ricordano. ${promptNumber} di ${randomNumbers.length}`) ) );
-            };
+            const playerNumbers = getUserNumbers (randomNumbers.length)
 
             //* 4.
-            const rightNumbers = randomNumbers.filter(element => playerNumbers.includes(element));
+            const rightNumbers = randomNumbers.filter(number => playerNumbers.includes(number));
 
             if (rightNumbers.length != 0) {
                 indexText.innerHTML = `Hai ricordato ben ${rightNumbers.length} numeri ed erano: ${rightNumbers}`;
@@ -54,7 +38,7 @@ setTimeout(() => {
             }
         }, 100);
 
-    },2500);
+    },30000);
 
 }, 1500);
 
@@ -62,6 +46,36 @@ setTimeout(() => {
 *FUNCTIONS
 */
 
-function randomNum(min, max) {
+function randomNumUniv(itemNumber) {
+    const uniNumber = [];
+
+    while (uniNumber.length < itemNumber) {
+        const rand = randomNumber (1, 100);
+
+        //Check univoco
+        if ( !uniNumber.includes(rand) ) {
+            uniNumber.push(rand);
+        };
+    };
+
+    return uniNumber;
+
+};
+
+function randomNumber (min, max) {
     return Math.floor( Math.random() *(max - min + 1) + min );
+};
+
+function getUserNumbers (askTimes) {
+    const numbers = [];
+
+    while (numbers.length < askTimes) {
+        const userNumber = parseInt( prompt(`Inserire uno alla volta i numeri che si ricordano. ${numbers.length + 1} di ${askTimes}`) );
+
+        if ( !numbers.includes(userNumber) && !isNaN(userNumber) ) {
+            numbers.push(userNumber);
+        };
+    };
+
+    return numbers;
 };
